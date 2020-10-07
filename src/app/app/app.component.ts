@@ -11,6 +11,7 @@ import { Empresa } from '../models/empresa';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  title = "Panel Digital"
   public Empresamodal: Empresa[];
 
   // private crudApi: CrudService,
