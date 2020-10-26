@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 
 import { NavComponent } from './components/nav/nav.component';
+import { EmpresaModule } from './components/empresa/empresa.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NavComponent } from './components/nav/nav.component';
     NoopAnimationsModule,
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    EmpresaModule
   ],
   providers: [ { provide: BUCKET, useValue: 'gs://ofpempresas.appspot.com' } ],
   bootstrap: [AppComponent]

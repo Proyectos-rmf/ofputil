@@ -15,3 +15,12 @@
   top: 0;
   z-index: 1;
 }
+
+.title-center {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+[hidden] {
+  display: none !important;
+}
