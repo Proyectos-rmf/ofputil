@@ -1,9 +1,24 @@
+<!-- <div fxLayout='column' class="zero">
+  <p>Empieza</p>
+  <div fxFlex="33" class="one" >Uno</div>
+  <div fxFlex="33%" class="two">
+    DOS
+    <div fxFlex="22%"    class="two_one">Uno</div>
+    <div fxFlex="205px"  class="two_two">Dos</div>
+    <div fxFlex="30"     class="two_three">Tres</div>
+
+  </div>
+  <div fxFlex class="three">Tres</div>
+
+</div> -->
+<!-- class="sidenav" -->
+
 <mat-sidenav-container class="sidenav-container">
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+  <mat-sidenav #drawer fixedInViewport class="sidenav"
+      [attr.role]="(devicexs) ? 'dialog' : 'navigation'"
+      [mode]="(devicexs) ? 'over' : 'side'"
+      [opened]="(devicexs) === false">
 
     <mat-toolbar>
       <span class="title-center">Menu</span>
@@ -15,7 +30,6 @@
         {{menuItems[i].opcion | titlecase}}</a>
     </mat-nav-list>
   </mat-sidenav>
-
   <mat-sidenav-content>
     <mat-toolbar>
       <button
@@ -23,11 +37,11 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="devicexs">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>{{opcionElejida | titlecase}}</span>
+      <span>{{opcionElejida}}</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
-  </mat-sidenav-content>
+    </mat-sidenav-content>
 </mat-sidenav-container>

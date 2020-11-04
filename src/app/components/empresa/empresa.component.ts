@@ -34,7 +34,6 @@ export class EmpresaComponent implements OnInit {
       if (this.Empresamodal[0]?.id) {
         this.noactivo = false;
         this.UTIL.Variables(this.Empresamodal);
-        console.log('Con EMPRESAS');
         // this.router.navigate(['empresas/buscar']);
       } else {
         this.noactivo = true;

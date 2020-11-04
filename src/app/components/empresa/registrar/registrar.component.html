@@ -1,22 +1,26 @@
 <mat-horizontal-stepper labelPosition="bottom" #stepper>
   <mat-step>
     <ng-template matStepLabel>Archivo con formato</ng-template>
-      <div class="example-form">
-        <mat-form-field class="example-full-width">
+
+      <div fxLayout="row" fxLayoutAlign="center">
+        <mat-form-field style="width:599px !important">
           <p class="file-name" *ngIf="!file; else fileName">Seleccione EMPRESA, archivo extensión XLS</p>
+
           <input matInput disabled placeholder="Si tiene archivo con formato (Leyout), Presione el icono">
-          <input type="file" style="display: none" #fileInput accept="*/*" (change)="onChangeFileInput()" />
+          <input type="file" (change)="onFileChange($event)" style="display: none" #fileInput accept="*/*" (change)="onChangeFileInput()" #archivo/>
+
           <button matSuffix mat-mini-fab class="file-select-button" (click)="onClickFileInputButton()">
             <mat-icon>attach_file</mat-icon>
           </button>
         </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Próximo</button>
-        </div>
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="end start">
+        <button mat-button matStepperNext>Próximo</button>
       </div>
 
       <ng-template #llena>
-        <app-llenar></app-llenar>
+        <app-llenar [archivo]="arEmpresa"></app-llenar>
       </ng-template>
 
       <ng-template #fileName>
@@ -30,12 +34,14 @@
       <button mat-button color="accent" (click)="llenado()" *ngIf="!llenar; else llena">
         Presione click si desea llenar los campos o no cuenta con archivo con formato
       </button>
+      <!-- <app-llenar [archivo]="arEmpresa"></app-llenar> -->
+      <div>
+        <br><br>
+        <button mat-button matStepperPrevious>Anterior</button>
+        <button mat-button matStepperNext>Próximo</button>
+      </div>
 
-    <div>
-      <button mat-button matStepperPrevious>Anterior</button>
-      <button mat-button matStepperNext>Próximo</button>
-    </div>
-  </mat-step>
+    </mat-step>
 
   <mat-step>
     <ng-template matStepLabel>Terminado</ng-template>

@@ -16,6 +16,23 @@ export class UtilService {
     this.apuntador.next(value);
   }
 
+  getErrorMessage(campo: any): string {
+    if (campo.errors != null) {
+      if (campo.errors.required) {
+        return 'Es necesario introducir datos';
+      }
+
+      if (campo.errors.minlength.requiredLength) {
+        return 'Mínimo de ' + campo.errors.minlength.requiredLength + ' Caractéres';
+      }
+    }
+
+    if (campo.status === 'INVALID') {
+      return 'El dato no es válido';
+    }
+
+  }
+
   msjwsal(cual: string, icono?: any, titulo?: any, op1?: any, op2?: any, op3?: any, op4?: any, entra?: boolean): void {
     switch (cual) {
       case 'carga':

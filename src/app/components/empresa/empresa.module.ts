@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { EmpresaRoutingModule } from './empresa-routing.module';
 import { EmpresaComponent } from './empresa.component';
@@ -10,11 +10,11 @@ import { RegistrarComponent } from './registrar/registrar.component';
 import { ElegirComponent } from './elegir/elegir.component';
 import { LlenarComponent } from './registrar/llenar/llenar.component';
 
-
 @NgModule({
   declarations: [EmpresaComponent, RegistrarComponent, ElegirComponent, LlenarComponent],
   imports: [
     CommonModule,
+    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
