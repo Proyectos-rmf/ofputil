@@ -12,7 +12,7 @@ export const environment = {
     storageBucket: 'ofpempresas.appspot.com',
     messagingSenderId: '241047492111',
     appId: '1:241047492111:web:01306edde4a1b11105b57a'
-}
+  }
 };
 
 /*

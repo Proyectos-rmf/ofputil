@@ -22,6 +22,19 @@ export class CrudService {
     return this.db.collection(coleccion).snapshotChanges();
 }
 
+// idEmpresas(coleccion: string) {
+//   this.empresaColeccion = this.db.collection(coleccion);
+//   return this.empresaColeccion.snapshotChanges()
+//     .pipe(map(changes => {
+//       return changes.map(action => {
+//         const data = action.payload.doc.data();
+//         data.id = action.payload.doc.id;
+//         return data;
+//     });
+//   }));
+// }
+
+
 //  todasEmpresas(coleccion: string) {
 //    this.empresaColeccion = this.db.collection(coleccion);
 //   return this.tablas = this.empresaColeccion.snapshotChanges()

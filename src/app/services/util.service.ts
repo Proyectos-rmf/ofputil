@@ -17,13 +17,23 @@ export class UtilService {
   }
 
   getErrorMessage(campo: any): string {
+    // console.log(campo);
+
     if (campo.errors != null) {
       if (campo.errors.required) {
         return 'Es necesario introducir datos';
       }
 
-      if (campo.errors.minlength.requiredLength) {
+      if (campo.errors.pattern?.requiredPattern) {
+        return 'No es válido';
+      }
+
+      if (campo.errors.minlength?.requiredLength) {
         return 'Mínimo de ' + campo.errors.minlength.requiredLength + ' Caractéres';
+      }
+
+      if (campo.errors.maxlength?.requiredLength) {
+        return 'Máximo de ' + campo.errors.maxlength.requiredLength + ' Caractéres';
       }
     }
 

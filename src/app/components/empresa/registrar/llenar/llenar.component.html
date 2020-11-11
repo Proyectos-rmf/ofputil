@@ -1,73 +1,8 @@
-<!-- <div fxLayout="row" fxLayoutAlign="center">
-  <form [formGroup]="empresaForm" class="example-form">
-    <mat-card style="width:500px">
-      <mat-card-content>
-        <mat-form-field class="example-full-width">
-          <mat-label>Nombre de la Empresa</mat-label>
-          <input matInput formControlName="nombre_Emp" required>
-          <mat-error *ngIf="this.empresaForm.controls.nombre_Emp">{{getErrorMessage(this.empresaForm.controls.nombre_Emp)}}</mat-error>
-        </mat-form-field>
-
-        <table class="example-full-width" cellspacing="0"><tr>
-          <td>
-            <mat-form-field>
-              <mat-label>Ciudad</mat-label>
-              <input matInput formControlName="ciudad_Emp" required>
-              <mat-error *ngIf="this.empresaForm.controls.ciudad_Emp">{{getErrorMessage(this.empresaForm.controls.ciudad_Emp)}}</mat-error>
-            </mat-form-field>
-          </td>
-
-          <td>
-            <mat-form-field>
-              <mat-label>Estado</mat-label>
-              <input matInput formControlName="estado_Emp" required>
-              <mat-error *ngIf="this.empresaForm.controls.estado_Emp">{{getErrorMessage(this.empresaForm.controls.estado_Emp)}}</mat-error>
-            </mat-form-field>
-          </td>
-
-          <td>
-            <mat-form-field>
-              <mat-label>Calle</mat-label>
-              <input matInput formControlName="calle_Emp" required>
-              <mat-error *ngIf="this.empresaForm.controls.calle_Emp">{{getErrorMessage(this.empresaForm.controls.calle_Emp)}}</mat-error>
-            </mat-form-field>
-          </td>
-
-          </tr></table>
-
-          <table class="example-full-width" cellspacing="0"><tr>
-            <td>
-              <mat-form-field class="example-full-width">
-              <mat-label>Colonia</mat-label>
-                <input matInput formControlName="colonia_Emp" required>
-                <mat-error *ngIf="this.empresaForm.controls.colonia_Emp">{{getErrorMessage(this.empresaForm.controls.colonia_Emp)}}</mat-error>
-              </mat-form-field>
-            </td>
-
-            <td>
-              <mat-form-field class="example-full-width">
-              <mat-label>Código Postal</mat-label>
-                <input matInput formControlName="cp_Emp">
-                <mat-error *ngIf="this.empresaForm.controls.cp_Emp">{{getErrorMessage(this.empresaForm.controls.cp_Emp)}}</mat-error>
-              </mat-form-field>
-            </td>
-
-            <td>
-              <mat-form-field class="example-full-width">
-              <mat-label>Telefono</mat-label>
-                <input matInput formControlName="telefono_Emp" required>
-                <mat-error *ngIf="this.empresaForm.controls.telefono_Emp">{{getErrorMessage(this.empresaForm.controls.telefono_Emp)}}</mat-error>
-              </mat-form-field>
-            </td>
-
-          </tr></table>
-        </mat-card-content>
-      </mat-card>
-    </form>
-</div> -->
-
 <div fxLayout="row" fxLayoutAlign="center">
-  <form [formGroup]="empresaForm">
+  <form [formGroup]="empresaForm"
+        >
+        <!-- (ngSubmit)="onSubmit()" -->
+
     <mat-card style="width:500px">
       <mat-card-content>
 
@@ -103,18 +38,24 @@
 
         <mat-form-field style="width:70px !important; margin-left: 10px;">
           <mat-label>CP</mat-label>
-          <input matInput formControlName="cp_Emp">
+          <input matInput formControlName="cp_Emp" maxlength="6">
           <mat-error *ngIf="this.empresaForm.controls.cp_Emp">{{getErrorMessage(this.empresaForm.controls.cp_Emp)}}</mat-error>
         </mat-form-field>
 
         <mat-form-field style="width:140px !important; margin-left: 10px;">
           <mat-label>Teléfono</mat-label>
-          <input matInput formControlName="telefono_Emp">
+          <input matInput formControlName="telefono_Emp" maxlength="10">
           <mat-error *ngIf="this.empresaForm.controls.telefono_Emp">{{getErrorMessage(this.empresaForm.controls.telefono_Emp)}}</mat-error>
         </mat-form-field>
 
         <br><br>
 
+        <!-- type="submit" -->
+
+        <div style="display: flex; justify-content: space-between">
+          <button mat-raised-button type="reset" [disabled]="empresaForm.invalid">Limpiar</button>
+          <button mat-raised-button (click)="mostrarDialogo()" [disabled]="empresaForm.invalid">Grabar</button>
+        </div>
       </mat-card-content>
     </mat-card>
   </form>
