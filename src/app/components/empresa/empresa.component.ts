@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UtilService } from '../../services/util.service';
-import { Empresa } from '../../models/empresa';
 import { CrudService } from '../../services/empresas.service';
+import { Empresa } from '../../models/empresa';
 
 @Component({
   selector: 'app-empresa',

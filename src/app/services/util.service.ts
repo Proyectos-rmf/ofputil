@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
-import swal from 'sweetalert2';
+import { DialogComponent } from '../components/dialog/dialog-component';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +9,14 @@ import swal from 'sweetalert2';
 export class UtilService {
   private apuntador = new BehaviorSubject<any>(null);
   ApuntadorAction$ = this.apuntador.asObservable();
-  public Error;
 
-  constructor() { }
+  constructor(public dialogo: MatDialog) { }
 
   Variables(value: any): void {
     this.apuntador.next(value);
   }
 
   getErrorMessage(campo: any): string {
-    // console.log(campo);
 
     if (campo.errors != null) {
       if (campo.errors.required) {
@@ -43,66 +42,12 @@ export class UtilService {
 
   }
 
-  msjwsal(cual: string, icono?: any, titulo?: any, op1?: any, op2?: any, op3?: any, op4?: any, entra?: boolean): void {
-    switch (cual) {
-      case 'carga':
-        swal.showLoading();
-        break;
+  openDialog(Color: string, Icono: string, Info: string, tiempo: number): void {
+    const dialogRef = this.dialogo.open(DialogComponent, {
+      data: {color: Color, icono: Icono, info: Info},
+      disableClose: tiempo !== 0 ? true : false
+    });
 
-        case 'fire2':
-          if (entra) {
-            swal.fire({
-              footer: 'Registar Empresa',
-              icon: icono,
-              title: titulo,
-              allowOutsideClick: op1,
-              allowEscapeKey: op2,
-              showConfirmButton: op3,
-              timer: op4
-            });
-          }
-          break;
-
-
-          case 'fire':
-          if (entra) {
-            swal.fire({
-               icon: icono,
-               title: titulo,
-               allowOutsideClick: op1,
-               allowEscapeKey: op2,
-               showConfirmButton: op3,
-               timer: op4
-            });
-          }
-          break;
-
-      default:
-        break;
-    }
-  }
-
-  Errores(Errors: string, tipo: string): string {
-    this.Error = Errors;
-
-    switch (tipo) {
-      case 'required':
-        this.Error = this.Error?.required;
-        break;
-
-      case 'minlength':
-        this.Error = this.Error?.minlength;
-        break;
-
-      case 'minlength?':
-        this.Error = this.Error?.minlength;
-        this.Error = this.Error?.requiredLength;
-        break;
-
-      case 'pattern':
-        this.Error = this.Error?.pattern;
-        break;
-    }
-    return this.Error;
+    if (tiempo !== 0) { setTimeout(() => { dialogRef.close(); }, tiempo); }
   }
 }

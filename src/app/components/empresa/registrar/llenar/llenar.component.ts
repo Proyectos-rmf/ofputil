@@ -2,9 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { MatDialog } from '@angular/material/dialog';
-import { DialogoConfirmacionComponent } from '../../../dialogo-confirmacion/dialogo-confirmacion';
-
 import { UtilService } from 'src/app/services/util.service';
 import { CrudService } from 'src/app/services/empresas.service';
 import { XlsService } from 'src/app/services/xls.service';
@@ -22,7 +19,7 @@ export class LlenarComponent implements OnInit {
   public XLSarr$ = this.XLSX.XLSAction$;
 
   constructor(public XLSX: XlsService, public UTIL: UtilService, private router: Router,
-              public formBuilder: FormBuilder, public crudApi: CrudService, public dialogo: MatDialog) {}
+              public formBuilder: FormBuilder, public crudApi: CrudService) {}
 
   ngOnInit(): void {
     if (this.archivo) { this.onFileChange(this.archivo); }
@@ -43,7 +40,7 @@ export class LlenarComponent implements OnInit {
     if (navigator.onLine) {
       this.nuevaEmpresa();
     } else {
-      this.UTIL.msjwsal('fire', 'error', 'No tienes acceso a INTERNET, espere un momento ...', false, false, false, 3000, false);
+      this.UTIL.openDialog('red', 'clear', 'No tienes acceso a INTERNET, espere un momento ...', 3000);
      }
   }
 
@@ -73,7 +70,7 @@ export class LlenarComponent implements OnInit {
       setTimeout(() => {
         this.XLSarr$.subscribe(res => { this.datos = res; });
         this.ponerdatos(this.datos);
-      }, 100);
+      }, 300);
     });
   }
 
@@ -98,31 +95,10 @@ export class LlenarComponent implements OnInit {
   // }
 
   nuevaEmpresa(): void {
-    this.UTIL.msjwsal('carga');
     this.crudApi.creaEmpresa(this.empresaForm.value, 'empresa')
     .then((res) => {
-      // this.conecta = true;
-      this.UTIL.msjwsal('fire', 'success', 'Empresa Creada', false, false, false, 2000, true);
+      this.UTIL.openDialog('green', 'done', 'Empresa creada', 2000);
       this.router.navigate(['']);
-    });
-    this.UTIL.msjwsal('fire', 'error', 'La base de datos no esta DISPONIBLE', false, false, false, 0, true);
-  }
-
-  mostrarDialogo(): void {
-    const dialogRef = this.dialogo
-      .open(DialogoConfirmacionComponent, {
-        data: `¿Te gusta programar en TypeScript?`,
-        disableClose: true
-      });
-
-    setTimeout(() => { dialogRef.close(); }, 3000);
-    dialogRef.afterClosed()
-      .subscribe((confirmado: boolean) => {
-        if (confirmado) {
-          alert('¡A mí también!');
-        } else {
-          alert('Deberías probarlo, a mí me gusta :)');
-        }
-      });
+    }, (err) => this.UTIL.openDialog('red', 'clear', 'La Base de datgos no esta Disponible', 3000));
   }
 }
