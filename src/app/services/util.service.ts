@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
 import { DialogComponent } from '../components/dialog/dialog-component';
 
@@ -42,12 +42,27 @@ export class UtilService {
 
   }
 
-  openDialog(Color: string, Icono: string, Info: string, tiempo: number): void {
-    const dialogRef = this.dialogo.open(DialogComponent, {
-      data: {color: Color, icono: Icono, info: Info},
-      disableClose: tiempo !== 0 ? true : false
-    });
+  // start(Mensaje?): MatDialogRef<DialogComponent> {
+  //   const dialogRef = this.dialogo.open(DialogComponent, {
+  //       data: {color: Color, icono: Icono, info: Info},
+  //       disableClose: tiempo !== 0 ? true : false
+  //     });
+  //   return dialogRef;
+  // }
 
-    if (tiempo !== 0) { setTimeout(() => { dialogRef.close(); }, tiempo); }
+  openDialog(Color: string, Icono: string, Info: string, tiempo: number): void {
+
+
+      // const dialogRef = this.dialogo.open(DialogComponent, {
+      //   data: {color: Color, icono: Icono, info: Info},
+      //   disableClose: tiempo !== 0 ? true : false
+      // });
+
+      // if (tiempo !== 0) { setTimeout(() => { dialogRef.close(); }, tiempo); }
+    // }
+
+      // stop(ref:MatDialogRef<DialogComponent>){
+      //  ref.close();
+      // }
   }
 }
