@@ -37,8 +37,7 @@ export class EmpresaComponent implements OnInit {
         this.noactivo = false;
         this.UTIL.Variables(this.Empresamodal);
       } else {
-        this.noactivo = true;
-        console.log('Sin EMPRESAS');
+          this.noactivo = true;
         }
 
       this.UTIL.stop(espera);
