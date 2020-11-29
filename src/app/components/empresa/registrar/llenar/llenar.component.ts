@@ -95,12 +95,12 @@ export class LlenarComponent implements OnInit {
   // }
 
   nuevaEmpresa(): void {
-    this.UTIL.openDialog('', '', 'Loading...', 0);
-    // this.UTIL.openDialog('green', 'done', 'Empresa creada', 2000);
-  //   this.crudApi.creaEmpresa(this.empresaForm.value, 'empresa')
-  //   .then((res) => {
-  //     this.UTIL.openDialog('green', 'done', 'Empresa creada', 2000);
-  //     this.router.navigate(['']);
-  //   }, (err) => this.UTIL.openDialog('red', 'clear', 'La Base de datgos no esta Disponible', 3000));
+    const cargando = this.UTIL.start();
+    this.crudApi.creaEmpresa(this.empresaForm.value, 'empresa')
+    .then((res) => {
+      this.UTIL.stop(cargando);
+      this.UTIL.openDialog('green', 'done', 'Empresa creada', 2000);
+      this.router.navigate(['']);
+    }, (err) => this.UTIL.openDialog('red', 'clear', 'La Base de datos no esta Disponible', 3000));
   }
 }

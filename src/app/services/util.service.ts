@@ -42,27 +42,25 @@ export class UtilService {
 
   }
 
-  // start(Mensaje?): MatDialogRef<DialogComponent> {
-  //   const dialogRef = this.dialogo.open(DialogComponent, {
-  //       data: {color: Color, icono: Icono, info: Info},
-  //       disableClose: tiempo !== 0 ? true : false
-  //     });
-  //   return dialogRef;
-  // }
+  start(): MatDialogRef<DialogComponent> {
+    const dialogRef = this.dialogo.open(DialogComponent, {
+        data: {info: 'Espere...', carga: true},
+        disableClose: false
+    });
+    return dialogRef;
+  }
+
+  // tslint:disable-next-line: typedef
+  stop(ref: MatDialogRef<DialogComponent>){
+    ref.close();
+  }
 
   openDialog(Color: string, Icono: string, Info: string, tiempo: number): void {
+    const dialogRef = this.dialogo.open(DialogComponent, {
+      data: {color: Color, icono: Icono, info: Info, carga: false},
+      disableClose: tiempo !== 0 ? true : false
+    });
 
-
-      // const dialogRef = this.dialogo.open(DialogComponent, {
-      //   data: {color: Color, icono: Icono, info: Info},
-      //   disableClose: tiempo !== 0 ? true : false
-      // });
-
-      // if (tiempo !== 0) { setTimeout(() => { dialogRef.close(); }, tiempo); }
-    // }
-
-      // stop(ref:MatDialogRef<DialogComponent>){
-      //  ref.close();
-      // }
+    if (tiempo !== 0) { setTimeout(() => { dialogRef.close(); }, tiempo); }
   }
 }

@@ -22,6 +22,8 @@ export class EmpresaComponent implements OnInit {
   }
 
   listaEmpresas(coleccion: string): void {
+    const espera = this.UTIL.start();
+
     this.crudApi.TodasEmpresas(coleccion).subscribe(data => {
       this.Empresamodal = data.map(e => {
         return {
@@ -34,12 +36,16 @@ export class EmpresaComponent implements OnInit {
       if (this.Empresamodal[0]?.id) {
         this.noactivo = false;
         this.UTIL.Variables(this.Empresamodal);
-        // this.router.navigate(['empresas/buscar']);
       } else {
         this.noactivo = true;
         console.log('Sin EMPRESAS');
-          // this.router.navigate(['empresa/empresa']);
         }
+
+      this.UTIL.stop(espera);
+    }, (error) => {
+        this.UTIL.stop(espera);
+        this.UTIL.openDialog('red', 'clear', 'La Base de datos no esta Disponible', 3000);
+        this.router.navigate(['']);
     });
   }
 
